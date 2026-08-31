@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+        content="width=device-width, initial-scale=1.0">
 
   <title>保育園持ち物</title>
 
@@ -28,8 +28,8 @@
 
       background: #f5f5f5;
 
-      /* LINE上部の表示領域を考慮 */
-      padding: 6px 10px 8px;
+      /* 余白を最小限に */
+      padding: 4px 8px;
 
       overflow: hidden;
     }
@@ -40,30 +40,22 @@
       margin: 0 auto;
     }
 
-    /* タイトル */
-    h1 {
-      text-align: center;
-      font-size: 20px;
-      line-height: 1.2;
-
-      margin: 3px 0 8px;
-    }
-
-    /* 入力項目 */
+    /* 各項目 */
     .item {
+      width: 100%;
+      height: 44px;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
 
-      background: white;
+      background: #fff;
 
-      height: 48px;
+      padding: 4px 10px;
 
-      padding: 5px 10px;
+      margin-bottom: 4px;
 
-      margin-bottom: 5px;
-
-      border-radius: 8px;
+      border-radius: 7px;
     }
 
     .item label {
@@ -79,62 +71,60 @@
 
     input[type="number"] {
       width: 65px;
-      height: 36px;
+      height: 34px;
 
       padding: 0;
-
-      font-size: 19px;
-      text-align: center;
 
       border: 1px solid #ccc;
       border-radius: 6px;
 
-      background: white;
+      background: #fff;
+
+      font-size: 18px;
+      text-align: center;
     }
 
     .unit {
-      font-size: 15px;
       margin-left: 4px;
+      font-size: 15px;
     }
 
     /* その他 */
     .other {
+      width: 100%;
+      height: 44px;
+
       display: flex;
       align-items: center;
 
-      background: white;
+      background: #fff;
 
-      height: 48px;
+      padding: 4px 10px;
 
-      padding: 5px 10px;
+      margin-bottom: 5px;
 
-      margin-top: 5px;
-
-      border-radius: 8px;
+      border-radius: 7px;
     }
 
     .other label {
-      width: 55px;
+      width: 60px;
+
+      flex-shrink: 0;
 
       font-size: 16px;
       font-weight: bold;
-
-      flex-shrink: 0;
     }
 
     input[type="text"] {
-      flex: 1;
-
-      min-width: 0;
-
-      height: 36px;
-
-      padding: 4px 8px;
-
-      font-size: 16px;
+      width: 100%;
+      height: 34px;
 
       border: 1px solid #ccc;
       border-radius: 6px;
+
+      padding: 3px 8px;
+
+      font-size: 16px;
     }
 
     /* 送信ボタン */
@@ -142,73 +132,49 @@
       display: block;
 
       width: 100%;
-      height: 46px;
-
-      margin-top: 8px;
+      height: 44px;
 
       padding: 0;
-
-      font-size: 17px;
-      font-weight: bold;
+      margin: 0;
 
       border: none;
-      border-radius: 8px;
+      border-radius: 7px;
 
       background: #06c755;
       color: white;
+
+      font-size: 17px;
+      font-weight: bold;
     }
 
     button:disabled {
       opacity: 0.5;
     }
 
-    /* 説明 */
-    .message {
-      text-align: center;
-
-      font-size: 11px;
-      line-height: 1.2;
-
-      color: #777;
-
-      margin-top: 4px;
-    }
-
-    /* 小さいスマホ用 */
-    @media (max-height: 650px) {
+    /* 非常に小さい画面 */
+    @media (max-height: 600px) {
 
       body {
-        padding-top: 3px;
-        padding-bottom: 4px;
-      }
-
-      h1 {
-        font-size: 18px;
-        margin: 2px 0 5px;
+        padding: 2px 7px;
       }
 
       .item {
-        height: 43px;
-        margin-bottom: 4px;
+        height: 39px;
+        margin-bottom: 3px;
       }
 
       .other {
-        height: 43px;
-        margin-top: 4px;
+        height: 39px;
+        margin-bottom: 4px;
       }
 
       input[type="number"],
       input[type="text"] {
-        height: 32px;
+        height: 30px;
       }
 
       button {
-        height: 42px;
-        margin-top: 6px;
-      }
-
-      .message {
-        display: none;
+        height: 40px;
       }
     }
   </style>
@@ -217,8 +183,6 @@
 <body>
 
   <div class="container">
-
-    <h1>🏫 保育園の持ち物</h1>
 
     <!-- シャツ -->
     <div class="item">
@@ -322,18 +286,13 @@
     </div>
 
 
-    <!-- 送信ボタン -->
+    <!-- 送信 -->
     <button
       id="sendButton"
       onclick="sendMessage()"
     >
       LINEに送信
     </button>
-
-
-    <div class="message">
-      入力した内容を指定のLINEへ送信します
-    </div>
 
   </div>
 
@@ -352,8 +311,8 @@
     // GAS WebアプリURL
     // =========================
     //
-    // ★ここは現在使用しているURLを
-    // そのまま入れてください。
+    // ★ここは現在使用している
+    // GAS URLをそのまま入れてください
     //
 
     const GAS_URL =
@@ -383,9 +342,7 @@
         alert(
           "LINEの初期化に失敗しました。"
         );
-
       }
-
     }
 
 
@@ -398,16 +355,11 @@
       const button =
         document.getElementById("sendButton");
 
-
-      // 二重送信防止
-
       button.disabled = true;
       button.textContent = "送信中...";
 
 
-      // =========================
-      // 数字取得
-      // =========================
+      // 入力値
 
       const shirts =
         document.getElementById("shirts").value;
@@ -425,9 +377,7 @@
         document.getElementById("other").value;
 
 
-      // =========================
-      // LINEメッセージ作成
-      // =========================
+      // メッセージ
 
       const message =
 `【保育園の持ち物】
@@ -475,22 +425,14 @@ ${other || "なし"}`;
         if (
           result.startsWith("ERROR")
         ) {
-
           throw new Error(result);
-
         }
 
 
-        // =========================
-        // 成功
-        // =========================
-
-        alert(
-          "送信しました！"
-        );
+        alert("送信しました！");
 
 
-        // 入力リセット
+        // リセット
 
         document.getElementById(
           "shirts"
@@ -528,13 +470,10 @@ ${other || "なし"}`;
         button.textContent = "LINEに送信";
 
       }
-
     }
 
 
-    // =========================
     // 起動
-    // =========================
 
     main();
 

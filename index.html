@@ -6,132 +6,246 @@
 
   <title>保育園持ち物</title>
 
-  <!-- LINE LIFF -->
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
     body {
       font-family: sans-serif;
-      max-width: 500px;
-      margin: 0 auto;
-      padding: 20px;
       background: #f5f5f5;
+      padding: 10px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 500px;
+      height: 100%;
+      margin: 0 auto;
+
+      display: flex;
+      flex-direction: column;
     }
 
     h1 {
       text-align: center;
-      margin-bottom: 25px;
+      font-size: 22px;
+      margin: 5px 0 12px;
+    }
+
+    .items {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
     }
 
     .item {
       background: white;
-      padding: 15px;
-      margin: 10px 0;
-      border-radius: 10px;
+      padding: 9px 12px;
+      border-radius: 8px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     label {
-      display: block;
-      font-size: 18px;
-      margin-bottom: 8px;
+      font-size: 17px;
       font-weight: bold;
     }
 
-    input[type="number"] {
-      font-size: 20px;
-      padding: 8px;
-      width: 100px;
-      box-sizing: border-box;
+    .input-area {
+      display: flex;
+      align-items: center;
     }
 
-    input[type="text"] {
-      font-size: 18px;
-      padding: 10px;
-      width: 100%;
-      box-sizing: border-box;
+    input[type="number"] {
+      width: 75px;
+      height: 40px;
+
+      font-size: 20px;
+      text-align: center;
+
+      border: 1px solid #ccc;
+      border-radius: 6px;
     }
 
     .unit {
-      font-size: 18px;
+      font-size: 16px;
       margin-left: 5px;
+    }
+
+    .other {
+      background: white;
+      padding: 9px 12px;
+      margin-top: 7px;
+      border-radius: 8px;
+    }
+
+    .other label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      height: 40px;
+
+      font-size: 17px;
+      padding: 5px 8px;
+
+      border: 1px solid #ccc;
+      border-radius: 6px;
     }
 
     button {
       width: 100%;
-      padding: 15px;
-      margin-top: 20px;
+      height: 48px;
+
+      margin-top: 10px;
+
       font-size: 18px;
       font-weight: bold;
+
       border: none;
-      border-radius: 10px;
+      border-radius: 8px;
+
       background: #06c755;
       color: white;
+
       cursor: pointer;
     }
 
     button:disabled {
       opacity: 0.5;
-      cursor: not-allowed;
     }
 
-    button:active {
-      opacity: 0.7;
+    .message {
+      text-align: center;
+      font-size: 13px;
+      color: #666;
+      margin-top: 6px;
     }
   </style>
 </head>
 
 <body>
 
-  <h1>🏫 保育園の持ち物</h1>
+  <div class="container">
 
-  <!-- シャツ -->
-  <div class="item">
-    <label>シャツ</label>
-    <input id="shirts" type="number" min="0" value="0">
-    <span class="unit">枚</span>
-  </div>
+    <h1>🏫 保育園の持ち物</h1>
 
-  <!-- 肌着 -->
-  <div class="item">
-    <label>肌着</label>
-    <input id="underwear" type="number" min="0" value="0">
-    <span class="unit">枚</span>
-  </div>
+    <div class="items">
 
-  <!-- ズボン -->
-  <div class="item">
-    <label>ズボン</label>
-    <input id="pants" type="number" min="0" value="0">
-    <span class="unit">枚</span>
-  </div>
+      <!-- シャツ -->
+      <div class="item">
+        <label>シャツ</label>
 
-  <!-- おむつ -->
-  <div class="item">
-    <label>おむつ（残り）</label>
-    <input id="diapers" type="number" min="0" value="0">
-    <span class="unit">枚</span>
-  </div>
+        <div class="input-area">
+          <input
+            id="shirts"
+            type="number"
+            min="0"
+            inputmode="numeric"
+            value="0"
+          >
+          <span class="unit">枚</span>
+        </div>
+      </div>
 
-  <!-- その他 -->
-  <div class="item">
-    <label>その他</label>
-    <input
-      id="other"
-      type="text"
-      placeholder="例：帽子、タオル"
+      <!-- 肌着 -->
+      <div class="item">
+        <label>肌着</label>
+
+        <div class="input-area">
+          <input
+            id="underwear"
+            type="number"
+            min="0"
+            inputmode="numeric"
+            value="0"
+          >
+          <span class="unit">枚</span>
+        </div>
+      </div>
+
+      <!-- ズボン -->
+      <div class="item">
+        <label>ズボン</label>
+
+        <div class="input-area">
+          <input
+            id="pants"
+            type="number"
+            min="0"
+            inputmode="numeric"
+            value="0"
+          >
+          <span class="unit">枚</span>
+        </div>
+      </div>
+
+      <!-- おむつ -->
+      <div class="item">
+        <label>おむつ（残り）</label>
+
+        <div class="input-area">
+          <input
+            id="diapers"
+            type="number"
+            min="0"
+            inputmode="numeric"
+            value="0"
+          >
+          <span class="unit">枚</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- その他 -->
+    <div class="other">
+
+      <label>その他</label>
+
+      <input
+        id="other"
+        type="text"
+        placeholder="例：帽子、タオル"
+      >
+
+    </div>
+
+    <!-- 送信 -->
+    <button
+      id="sendButton"
+      onclick="sendMessage()"
     >
-  </div>
+      LINEに送信
+    </button>
 
-  <!-- 送信ボタン -->
-  <button id="sendButton" onclick="sendMessage()">
-    LINEに送信
-  </button>
+    <div class="message">
+      入力した内容を指定のLINEへ送信します
+    </div>
+
+  </div>
 
 
   <script>
 
     // =========================
-    // LINE LIFF
+    // LIFF ID
     // =========================
 
     const LIFF_ID = "2011343562-RUScNWDu";
@@ -141,14 +255,15 @@
     // GAS WebアプリURL
     // =========================
     //
-    // ★ここを自分のGAS URLに変更してください
+    // ★現在使用しているGAS URLを入れてください
     //
+
     const GAS_URL =
       "https://script.google.com/macros/s/AKfycbzF4kgOUhXYbaOeon0E_7hQ9Y5VxgWJkLVWrPLDdjwywathsHVLkZAIoi1wzgXmQfM/exec";
 
 
     // =========================
-    // LIFFを起動
+    // LIFF初期化
     // =========================
 
     async function main() {
@@ -159,24 +274,23 @@
           liffId: LIFF_ID
         });
 
-        console.log("LIFF initialization succeeded");
+        console.log(
+          "LIFF initialization succeeded"
+        );
 
       } catch (error) {
 
-        console.error(
-          "LIFF initialization failed:",
-          error
-        );
+        console.error(error);
 
         alert(
-          "LINEアプリの初期化に失敗しました。"
+          "LINEの初期化に失敗しました。"
         );
       }
     }
 
 
     // =========================
-    // GAS経由でLINEへ送信
+    // LINE送信
     // =========================
 
     async function sendMessage() {
@@ -184,13 +298,15 @@
       const button =
         document.getElementById("sendButton");
 
+
       // 二重送信防止
+
       button.disabled = true;
       button.textContent = "送信中...";
 
 
       // =========================
-      // 入力値を取得
+      // 入力値
       // =========================
 
       const shirts =
@@ -210,7 +326,7 @@
 
 
       // =========================
-      // 送信する文章
+      // メッセージ作成
       // =========================
 
       const message =
@@ -231,7 +347,8 @@ ${other || "なし"}`;
         // GASへ送信
         // =========================
 
-        const formData = new URLSearchParams();
+        const formData =
+          new URLSearchParams();
 
         formData.append(
           "message",
@@ -239,14 +356,36 @@ ${other || "なし"}`;
         );
 
 
-        await fetch(
-          GAS_URL,
-          {
-            method: "POST",
-            body: formData
-          }
+        const response =
+          await fetch(
+            GAS_URL,
+            {
+              method: "POST",
+              body: formData
+            }
+          );
+
+
+        const result =
+          await response.text();
+
+
+        console.log(
+          "GAS response:",
+          result
         );
 
+
+        if (
+          result.startsWith("ERROR")
+        ) {
+          throw new Error(result);
+        }
+
+
+        // =========================
+        // 成功
+        // =========================
 
         alert(
           "送信しました！"
@@ -254,11 +393,26 @@ ${other || "なし"}`;
 
 
         // 入力をリセット
-        document.getElementById("shirts").value = 0;
-        document.getElementById("underwear").value = 0;
-        document.getElementById("pants").value = 0;
-        document.getElementById("diapers").value = 0;
-        document.getElementById("other").value = "";
+
+        document.getElementById(
+          "shirts"
+        ).value = 0;
+
+        document.getElementById(
+          "underwear"
+        ).value = 0;
+
+        document.getElementById(
+          "pants"
+        ).value = 0;
+
+        document.getElementById(
+          "diapers"
+        ).value = 0;
+
+        document.getElementById(
+          "other"
+        ).value = "";
 
 
       } catch (error) {
@@ -267,13 +421,15 @@ ${other || "なし"}`;
 
         alert(
           "送信できませんでした。\n" +
-          "通信状態を確認してください。"
+          "通信状態やGASの設定を確認してください。"
         );
 
       } finally {
 
         button.disabled = false;
-        button.textContent = "LINEに送信";
+
+        button.textContent =
+          "LINEに送信";
       }
     }
 

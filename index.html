@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-  <title>保育園持ち物</title>
+  <title>持ち物</title>
 
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
 
@@ -28,7 +28,6 @@
 
       background: #f5f5f5;
 
-      /* 余白を最小限に */
       padding: 4px 8px;
 
       overflow: hidden;
@@ -42,12 +41,11 @@
 
     /* 各項目 */
     .item {
-      width: 100%;
-      height: 44px;
-
       display: flex;
       align-items: center;
       justify-content: space-between;
+
+      height: 45px;
 
       background: #fff;
 
@@ -61,7 +59,6 @@
     .item label {
       font-size: 16px;
       font-weight: bold;
-      white-space: nowrap;
     }
 
     .input-area {
@@ -75,27 +72,26 @@
 
       padding: 0;
 
+      font-size: 18px;
+      text-align: center;
+
       border: 1px solid #ccc;
       border-radius: 6px;
 
       background: #fff;
-
-      font-size: 18px;
-      text-align: center;
     }
 
     .unit {
-      margin-left: 4px;
       font-size: 15px;
+      margin-left: 4px;
     }
 
     /* その他 */
     .other {
-      width: 100%;
-      height: 44px;
-
       display: flex;
       align-items: center;
+
+      height: 45px;
 
       background: #fff;
 
@@ -107,78 +103,52 @@
     }
 
     .other label {
-      width: 60px;
-
-      flex-shrink: 0;
+      width: 55px;
 
       font-size: 16px;
       font-weight: bold;
+
+      flex-shrink: 0;
     }
 
     input[type="text"] {
-      width: 100%;
+      flex: 1;
+
+      min-width: 0;
+
       height: 34px;
+
+      padding: 3px 7px;
+
+      font-size: 16px;
 
       border: 1px solid #ccc;
       border-radius: 6px;
-
-      padding: 3px 8px;
-
-      font-size: 16px;
     }
 
     /* 送信ボタン */
     button {
-      display: block;
-
       width: 100%;
       height: 44px;
 
       padding: 0;
-      margin: 0;
+
+      font-size: 17px;
+      font-weight: bold;
 
       border: none;
       border-radius: 7px;
 
       background: #06c755;
       color: white;
-
-      font-size: 17px;
-      font-weight: bold;
     }
 
     button:disabled {
       opacity: 0.5;
     }
-
-    /* 非常に小さい画面 */
-    @media (max-height: 600px) {
-
-      body {
-        padding: 2px 7px;
-      }
-
-      .item {
-        height: 39px;
-        margin-bottom: 3px;
-      }
-
-      .other {
-        height: 39px;
-        margin-bottom: 4px;
-      }
-
-      input[type="number"],
-      input[type="text"] {
-        height: 30px;
-      }
-
-      button {
-        height: 40px;
-      }
-    }
   </style>
 </head>
+
 
 <body>
 
@@ -311,8 +281,7 @@
     // GAS WebアプリURL
     // =========================
     //
-    // ★ここは現在使用している
-    // GAS URLをそのまま入れてください
+    // ★現在使用しているGAS URLを入れてください
     //
 
     const GAS_URL =
@@ -339,10 +308,8 @@
 
         console.error(error);
 
-        alert(
-          "LINEの初期化に失敗しました。"
-        );
       }
+
     }
 
 
@@ -470,10 +437,9 @@ ${other || "なし"}`;
         button.textContent = "LINEに送信";
 
       }
+
     }
 
-
-    // 起動
 
     main();
 

@@ -69,6 +69,11 @@
       cursor: pointer;
     }
 
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
     button:active {
       opacity: 0.7;
     }
@@ -118,26 +123,34 @@
   </div>
 
   <!-- 送信ボタン -->
-  <button onclick="sendMessage()">
+  <button id="sendButton" onclick="sendMessage()">
     LINEに送信
   </button>
 
 
   <script>
 
-    /*
-     * LIFF ID
-     *
-     * LIFFアプリを作成した後に、
-     * ここへLIFF IDを入力します。
-     *
-     * 例：
-     * const LIFF_ID = "1234567890-AbCdEfGh";
-     */
+    // =========================
+    // LINE LIFF
+    // =========================
+
     const LIFF_ID = "2011343562-RUScNWDu";
 
 
+    // =========================
+    // GAS WebアプリURL
+    // =========================
+    //
+    // ★ここを自分のGAS URLに変更してください
+    //
+    const GAS_URL =
+      "https://script.google.com/macros/s/AKfycbzF4kgOUhXYbaOeon0E_7hQ9Y5VxgWJkLVWrPLDdjwywathsHVLkZAIoi1wzgXmQfM/exec";
+
+
+    // =========================
     // LIFFを起動
+    // =========================
+
     async function main() {
 
       try {
@@ -150,17 +163,36 @@
 
       } catch (error) {
 
-        console.error("LIFF initialization failed:", error);
+        console.error(
+          "LIFF initialization failed:",
+          error
+        );
 
+        alert(
+          "LINEアプリの初期化に失敗しました。"
+        );
       }
-
     }
 
 
-    // LINEへメッセージを送信
+    // =========================
+    // GAS経由でLINEへ送信
+    // =========================
+
     async function sendMessage() {
 
-      // 入力された数字を取得
+      const button =
+        document.getElementById("sendButton");
+
+      // 二重送信防止
+      button.disabled = true;
+      button.textContent = "送信中...";
+
+
+      // =========================
+      // 入力値を取得
+      // =========================
+
       const shirts =
         document.getElementById("shirts").value;
 
@@ -173,12 +205,14 @@
       const diapers =
         document.getElementById("diapers").value;
 
-      // その他
       const other =
         document.getElementById("other").value;
 
 
-      // LINEへ送る文章
+      // =========================
+      // 送信する文章
+      // =========================
+
       const message =
 `【保育園の持ち物】
 
@@ -193,14 +227,39 @@ ${other || "なし"}`;
 
       try {
 
-        await liff.sendMessages([
-          {
-            type: "text",
-            text: message
-          }
-        ]);
+        // =========================
+        // GASへ送信
+        // =========================
 
-        alert("LINEに送信しました！");
+        const formData = new URLSearchParams();
+
+        formData.append(
+          "message",
+          message
+        );
+
+
+        await fetch(
+          GAS_URL,
+          {
+            method: "POST",
+            body: formData
+          }
+        );
+
+
+        alert(
+          "送信しました！"
+        );
+
+
+        // 入力をリセット
+        document.getElementById("shirts").value = 0;
+        document.getElementById("underwear").value = 0;
+        document.getElementById("pants").value = 0;
+        document.getElementById("diapers").value = 0;
+        document.getElementById("other").value = "";
+
 
       } catch (error) {
 
@@ -208,15 +267,21 @@ ${other || "なし"}`;
 
         alert(
           "送信できませんでした。\n" +
-          "LINEアプリから開いているか確認してください。"
+          "通信状態を確認してください。"
         );
 
-      }
+      } finally {
 
+        button.disabled = false;
+        button.textContent = "LINEに送信";
+      }
     }
 
 
-    // LIFF開始
+    // =========================
+    // 開始
+    // =========================
+
     main();
 
   </script>

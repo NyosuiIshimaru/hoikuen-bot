@@ -27,9 +27,7 @@
                    "Helvetica Neue", sans-serif;
 
       background: #f5f5f5;
-
       padding: 6px 6px 8px;
-
       overflow: hidden;
     }
 
@@ -39,51 +37,38 @@
       margin: 0 auto;
     }
 
-    /* タイトル */
     h1 {
       text-align: center;
       font-size: 20px;
       line-height: 1.2;
-
       margin: 3px 0 8px;
     }
 
-    /* 項目 */
     .item {
       background: white;
-
       padding: 7px 8px;
-
       margin-bottom: 5px;
-
       border-radius: 8px;
     }
 
     .item-label {
       display: block;
-
       font-size: 16px;
       font-weight: bold;
-
       margin-bottom: 6px;
     }
 
-    /* 枚数ボタン */
+    /* シャツ・肌着・ズボン */
     .count-buttons {
       display: grid;
-
       grid-template-columns: repeat(4, 1fr);
-
       gap: 6px;
-
       width: 100%;
     }
 
     .count-button {
       height: 40px;
-
       padding: 0;
-
       font-size: 15px;
       font-weight: bold;
 
@@ -94,7 +79,6 @@
       color: #333;
 
       cursor: pointer;
-
       margin: 0;
     }
 
@@ -108,17 +92,14 @@
     .diaper-area {
       display: flex;
       align-items: center;
-
       gap: 6px;
     }
 
     .diaper-choice {
       height: 40px;
-
       flex: 1;
 
       padding: 0;
-
       font-size: 15px;
       font-weight: bold;
 
@@ -128,6 +109,7 @@
       background: white;
       color: #333;
 
+      cursor: pointer;
       margin: 0;
     }
 
@@ -139,9 +121,7 @@
 
     #diaperNumberArea {
       display: none;
-
       align-items: center;
-
       gap: 4px;
     }
 
@@ -174,7 +154,6 @@
       min-height: 48px;
 
       padding: 6px 8px;
-
       margin-top: 5px;
 
       border-radius: 8px;
@@ -191,7 +170,6 @@
 
     input[type="text"] {
       flex: 1;
-
       min-width: 0;
 
       height: 36px;
@@ -212,7 +190,6 @@
       height: 46px;
 
       margin-top: 8px;
-
       padding: 0;
 
       font-size: 17px;
@@ -231,7 +208,6 @@
       opacity: 0.5;
     }
 
-    /* 説明 */
     .message {
       text-align: center;
 
@@ -243,7 +219,7 @@
       margin-top: 4px;
     }
 
-    /* 小さいスマホ用 */
+    /* 小さいスマホ */
     @media (max-height: 650px) {
 
       body {
@@ -311,36 +287,43 @@
 
       <div class="count-buttons">
 
-        <button class="count-button selected"
-                data-item="shirts"
-                data-value="なし"
-                onclick="selectCount(this)">
+        <button
+          type="button"
+          class="count-button selected"
+          data-item="shirts"
+          data-value="なし"
+          onclick="selectCount(this)">
           なし
         </button>
 
-        <button class="count-button"
-                data-item="shirts"
-                data-value="1"
-                onclick="selectCount(this)">
+        <button
+          type="button"
+          class="count-button"
+          data-item="shirts"
+          data-value="1"
+          onclick="selectCount(this)">
           1枚
         </button>
 
-        <button class="count-button"
-                data-item="shirts"
-                data-value="2"
-                onclick="selectCount(this)">
+        <button
+          type="button"
+          class="count-button"
+          data-item="shirts"
+          data-value="2"
+          onclick="selectCount(this)">
           2枚
         </button>
 
-        <button class="count-button"
-                data-item="shirts"
-                data-value="3"
-                onclick="selectCount(this)">
+        <button
+          type="button"
+          class="count-button"
+          data-item="shirts"
+          data-value="3"
+          onclick="selectCount(this)">
           3枚
         </button>
 
       </div>
-
     </div>
 
 
@@ -351,36 +334,43 @@
 
       <div class="count-buttons">
 
-        <button class="count-button selected"
-                data-item="underwear"
-                data-value="なし"
-                onclick="selectCount(this)">
+        <button
+          type="button"
+          class="count-button selected"
+          data-item="underwear"
+          data-value="なし"
+          onclick="selectCount(this)">
           なし
         </button>
 
-        <button class="count-button"
-                data-item="underwear"
-                data-value="1"
-                onclick="selectCount(this)">
+        <button
+          type="button"
+          class="count-button"
+          data-item="underwear"
+          data-value="1"
+          onclick="selectCount(this)">
           1枚
         </button>
 
-        <button class="count-button"
-                data-item="underwear"
-                data-value="2"
-                onclick="selectCount(this)">
+        <button
+          type="button"
+          class="count-button"
+          data-item="underwear"
+          data-value="2"
+          onclick="selectCount(this)">
           2枚
         </button>
 
-        <button class="count-button"
-                data-item="underwear"
-                data-value="3"
-                onclick="selectCount(this)">
+        <button
+          type="button"
+          class="count-button"
+          data-item="underwear"
+          data-value="3"
+          onclick="selectCount(this)">
           3枚
         </button>
 
       </div>
-
     </div>
 
 
@@ -391,36 +381,43 @@
 
       <div class="count-buttons">
 
-        <button class="count-button selected"
-                data-item="pants"
-                data-value="なし"
-                onclick="selectCount(this)">
+        <button
+          type="button"
+          class="count-button selected"
+          data-item="pants"
+          data-value="なし"
+          onclick="selectCount(this)">
           なし
         </button>
 
-        <button class="count-button"
-                data-item="pants"
-                data-value="1"
-                onclick="selectCount(this)">
+        <button
+          type="button"
+          class="count-button"
+          data-item="pants"
+          data-value="1"
+          onclick="selectCount(this)">
           1枚
         </button>
 
-        <button class="count-button"
-                data-item="pants"
-                data-value="2"
-                onclick="selectCount(this)">
+        <button
+          type="button"
+          class="count-button"
+          data-item="pants"
+          data-value="2"
+          onclick="selectCount(this)">
           2枚
         </button>
 
-        <button class="count-button"
-                data-item="pants"
-                data-value="3"
-                onclick="selectCount(this)">
+        <button
+          type="button"
+          class="count-button"
+          data-item="pants"
+          data-value="3"
+          onclick="selectCount(this)">
           3枚
         </button>
 
       </div>
-
     </div>
 
 
@@ -431,8 +428,8 @@
 
       <div class="diaper-area">
 
-        <!-- 初期状態：不要 -->
         <button
+          type="button"
           id="diaperNone"
           class="diaper-choice selected"
           onclick="selectDiaper('none')">
@@ -440,6 +437,7 @@
         </button>
 
         <button
+          type="button"
           id="diaperNeed"
           class="diaper-choice"
           onclick="selectDiaper('need')">
@@ -461,7 +459,6 @@
         </div>
 
       </div>
-
     </div>
 
 
@@ -481,6 +478,7 @@
 
     <!-- 送信ボタン -->
     <button
+      type="button"
       id="sendButton"
       onclick="sendMessage()">
       LINEに送信
@@ -508,6 +506,8 @@
     // GAS WebアプリURL
     // =========================
 
+    // ★現在使用しているGAS URLを入れてください
+
     const GAS_URL =
       "https://script.google.com/macros/s/AKfycbzF4kgOUhXYbaOeon0E_7hQ9Y5VxgWJkLVWrPLDdjwywathsHVLkZAIoi1wzgXmQfM/exec";
 
@@ -517,9 +517,13 @@
     // =========================
 
     const counts = {
+
       shirts: "なし",
+
       underwear: "なし",
+
       pants: "なし"
+
     };
 
 
@@ -536,20 +540,14 @@
         button.dataset.value;
 
 
-      // 値を保存
-
       counts[item] = value;
 
-
-      // 同じ項目のボタンを取得
 
       const buttons =
         document.querySelectorAll(
           `.count-button[data-item="${item}"]`
         );
 
-
-      // 選択状態をリセット
 
       buttons.forEach(btn => {
 
@@ -559,8 +557,6 @@
 
       });
 
-
-      // 押したボタンを選択状態
 
       button.classList.add(
         "selected"
@@ -634,7 +630,9 @@
       try {
 
         await liff.init({
+
           liffId: LIFF_ID
+
         });
 
         console.log(
@@ -658,70 +656,81 @@
     // 送信
     // =========================
 
-    ```javascript
-async function sendMessage() {
+    async function sendMessage() {
 
-  const button =
-    document.getElementById("sendButton");
-
-  button.disabled = true;
-  button.textContent = "送信中...";
+      const button =
+        document.getElementById(
+          "sendButton"
+        );
 
 
-  // =========================
-  // 数量取得
-  // =========================
+      button.disabled = true;
 
-  const shirts =
-    counts.shirts;
-
-  const underwear =
-    counts.underwear;
-
-  const pants =
-    counts.pants;
+      button.textContent =
+        "送信中...";
 
 
-  // =========================
-  // おむつ取得
-  // =========================
+      // =========================
+      // 数量取得
+      // =========================
 
-  const diaperNeed =
-    document
-      .getElementById("diaperNeed")
-      .classList
-      .contains("selected");
+      const shirts =
+        counts.shirts;
 
+      const underwear =
+        counts.underwear;
 
-  let diapers;
-
-  if (diaperNeed) {
-
-    diapers =
-      document.getElementById(
-        "diaperNumber"
-      ).value || 0;
-
-  } else {
-
-    diapers = "不要";
-
-  }
+      const pants =
+        counts.pants;
 
 
-  // =========================
-  // その他
-  // =========================
+      // =========================
+      // おむつ取得
+      // =========================
 
-  const other =
-    document.getElementById("other").value;
+      const diaperNeed =
+        document
+          .getElementById(
+            "diaperNeed"
+          )
+          .classList
+          .contains(
+            "selected"
+          );
 
 
-  // =========================
-  // メッセージ作成
-  // =========================
+      let diapers;
 
-  const message =
+
+      if (diaperNeed) {
+
+        diapers =
+          document.getElementById(
+            "diaperNumber"
+          ).value || 0;
+
+      } else {
+
+        diapers = "不要";
+
+      }
+
+
+      // =========================
+      // その他
+      // =========================
+
+      const other =
+        document.getElementById(
+          "other"
+        ).value;
+
+
+      // =========================
+      // メッセージ作成
+      // =========================
+
+      const message =
 `【保育園の持ち物】
 
 シャツ　${shirts === "なし" ? "なし" : shirts + "枚"}
@@ -733,81 +742,89 @@ async function sendMessage() {
 ${other || "なし"}`;
 
 
-  console.log(
-    "送信メッセージ:",
-    message
-  );
+      console.log(
+        "送信メッセージ:",
+        message
+      );
 
 
-  try {
+      try {
 
-    // =========================
-    // GASへ送信
-    // =========================
+        // =========================
+        // GASへ送信
+        // =========================
 
-    const formData =
-      new URLSearchParams();
-
-    formData.append(
-      "message",
-      message
-    );
+        const formData =
+          new URLSearchParams();
 
 
-    /*
-     * GASのレスポンスを
-     * ブラウザ側で待たない方式
-     *
-     * mode: "no-cors"
-     */
+        formData.append(
+          "message",
+          message
+        );
 
-    await fetch(
-      GAS_URL,
-      {
-        method: "POST",
-        mode: "no-cors",
-        body: formData
+
+        /*
+         * LIFFからGASへ送信
+         *
+         * no-corsにより
+         * GASのレスポンス取得を
+         * ブラウザ側で行わない
+         */
+
+        await fetch(
+
+          GAS_URL,
+
+          {
+
+            method: "POST",
+
+            mode: "no-cors",
+
+            body: formData
+
+          }
+
+        );
+
+
+        // =========================
+        // 送信成功
+        // =========================
+
+        alert(
+          "送信しました！"
+        );
+
+
+        resetForm();
+
+
+      } catch (error) {
+
+        console.error(
+          "送信エラー:",
+          error
+        );
+
+
+        alert(
+          "送信できませんでした。\n" +
+          "通信状態を確認してください。"
+        );
+
+
+      } finally {
+
+        button.disabled = false;
+
+        button.textContent =
+          "LINEに送信";
+
       }
-    );
 
-
-    // =========================
-    // 成功
-    // =========================
-
-    alert(
-      "送信しました！"
-    );
-
-
-    resetForm();
-
-
-  } catch (error) {
-
-    console.error(
-      "送信エラー:",
-      error
-    );
-
-    alert(
-      "送信できませんでした。\n" +
-      "通信状態を確認してください。"
-    );
-
-
-  } finally {
-
-    button.disabled = false;
-
-    button.textContent =
-      "LINEに送信";
-
-  }
-
-}
-```
-
+    }
 
 
     // =========================
@@ -816,16 +833,20 @@ ${other || "なし"}`;
 
     function resetForm() {
 
-      // シャツ・肌着・ズボンを
-      // 「なし」に戻す
+      counts.shirts =
+        "なし";
 
-      counts.shirts = "なし";
-      counts.underwear = "なし";
-      counts.pants = "なし";
+      counts.underwear =
+        "なし";
+
+      counts.pants =
+        "なし";
 
 
       document
-        .querySelectorAll(".count-button")
+        .querySelectorAll(
+          ".count-button"
+        )
         .forEach(button => {
 
           button.classList.remove(
@@ -834,7 +855,8 @@ ${other || "なし"}`;
 
 
           if (
-            button.dataset.value === "なし"
+            button.dataset.value ===
+            "なし"
           ) {
 
             button.classList.add(
@@ -846,9 +868,11 @@ ${other || "なし"}`;
         });
 
 
-      // おむつを「不要」に戻す
+      // おむつを不要に戻す
 
-      selectDiaper("none");
+      selectDiaper(
+        "none"
+      );
 
 
       document.getElementById(

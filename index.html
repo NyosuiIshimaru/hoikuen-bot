@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>保育園持ち物</title>
+
+  <!-- LINE LIFF -->
+  <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .item {
+      background: white;
+      padding: 15px;
+      margin: 10px 0;
+      border-radius: 10px;
+    }
+
+    label {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input[type="number"] {
+      font-size: 20px;
+      padding: 8px;
+      width: 100px;
+      box-sizing: border-box;
+    }
+
+    input[type="text"] {
+      font-size: 18px;
+      padding: 10px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    .unit {
+      font-size: 18px;
+      margin-left: 5px;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+      border: none;
+      border-radius: 10px;
+      background: #06c755;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:active {
+      opacity: 0.7;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>🏫 保育園の持ち物</h1>
+
+  <!-- シャツ -->
+  <div class="item">
+    <label>シャツ</label>
+    <input id="shirts" type="number" min="0" value="0">
+    <span class="unit">枚</span>
+  </div>
+
+  <!-- 肌着 -->
+  <div class="item">
+    <label>肌着</label>
+    <input id="underwear" type="number" min="0" value="0">
+    <span class="unit">枚</span>
+  </div>
+
+  <!-- ズボン -->
+  <div class="item">
+    <label>ズボン</label>
+    <input id="pants" type="number" min="0" value="0">
+    <span class="unit">枚</span>
+  </div>
+
+  <!-- おむつ -->
+  <div class="item">
+    <label>おむつ（残り）</label>
+    <input id="diapers" type="number" min="0" value="0">
+    <span class="unit">枚</span>
+  </div>
+
+  <!-- その他 -->
+  <div class="item">
+    <label>その他</label>
+    <input
+      id="other"
+      type="text"
+      placeholder="例：帽子、タオル"
+    >
+  </div>
+
+  <!-- 送信ボタン -->
+  <button onclick="sendMessage()">
+    LINEに送信
+  </button>
+
+
+  <script>
+
+    /*
+     * LIFF ID
+     *
+     * LIFFアプリを作成した後に、
+     * ここへLIFF IDを入力します。
+     *
+     * 例：
+     * const LIFF_ID = "1234567890-AbCdEfGh";
+     */
+    const LIFF_ID = "ここにLIFF IDを入れます";
+
+
+    // LIFFを起動
+    async function main() {
+
+      try {
+
+        await liff.init({
+          liffId: LIFF_ID
+        });
+
+        console.log("LIFF initialization succeeded");
+
+      } catch (error) {
+
+        console.error("LIFF initialization failed:", error);
+
+      }
+
+    }
+
+
+    // LINEへメッセージを送信
+    async function sendMessage() {
+
+      // 入力された数字を取得
+      const shirts =
+        document.getElementById("shirts").value;
+
+      const underwear =
+        document.getElementById("underwear").value;
+
+      const pants =
+        document.getElementById("pants").value;
+
+      const diapers =
+        document.getElementById("diapers").value;
+
+      // その他
+      const other =
+        document.getElementById("other").value;
+
+
+      // LINEへ送る文章
+      const message =
+`【保育園の持ち物】
+
+シャツ　${shirts}枚
+肌着　${underwear}枚
+ズボン　${pants}枚
+おむつ　残${diapers}枚
+
+その他
+${other || "なし"}`;
+
+
+      try {
+
+        await liff.sendMessages([
+          {
+            type: "text",
+            text: message
+          }
+        ]);
+
+        alert("LINEに送信しました！");
+
+      } catch (error) {
+
+        console.error(error);
+
+        alert(
+          "送信できませんでした。\n" +
+          "LINEアプリから開いているか確認してください。"
+        );
+
+      }
+
+    }
+
+
+    // LIFF開始
+    main();
+
+  </script>
+
+</body>
+</html>

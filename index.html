@@ -658,79 +658,70 @@
     // 送信
     // =========================
 
-    async function sendMessage() {
+    ```javascript
+async function sendMessage() {
 
-      const button =
-        document.getElementById(
-          "sendButton"
-        );
+  const button =
+    document.getElementById("sendButton");
 
-
-      // 二重送信防止
-
-      button.disabled = true;
-
-      button.textContent =
-        "送信中...";
+  button.disabled = true;
+  button.textContent = "送信中...";
 
 
-      // =========================
-      // 数量取得
-      // =========================
+  // =========================
+  // 数量取得
+  // =========================
 
-      const shirts =
-        counts.shirts;
+  const shirts =
+    counts.shirts;
 
-      const underwear =
-        counts.underwear;
+  const underwear =
+    counts.underwear;
 
-      const pants =
-        counts.pants;
-
-
-      // =========================
-      // おむつ取得
-      // =========================
-
-      const diaperNeed =
-        document
-          .getElementById("diaperNeed")
-          .classList
-          .contains("selected");
+  const pants =
+    counts.pants;
 
 
-      let diapers;
+  // =========================
+  // おむつ取得
+  // =========================
+
+  const diaperNeed =
+    document
+      .getElementById("diaperNeed")
+      .classList
+      .contains("selected");
 
 
-      if (diaperNeed) {
+  let diapers;
 
-        diapers =
-          document.getElementById(
-            "diaperNumber"
-          ).value || 0;
+  if (diaperNeed) {
 
-      } else {
+    diapers =
+      document.getElementById(
+        "diaperNumber"
+      ).value || 0;
 
-        diapers = "不要";
+  } else {
 
-      }
+    diapers = "不要";
 
-
-      // =========================
-      // その他
-      // =========================
-
-      const other =
-        document.getElementById(
-          "other"
-        ).value;
+  }
 
 
-      // =========================
-      // LINEメッセージ作成
-      // =========================
+  // =========================
+  // その他
+  // =========================
 
-      const message =
+  const other =
+    document.getElementById("other").value;
+
+
+  // =========================
+  // メッセージ作成
+  // =========================
+
+  const message =
 `【保育園の持ち物】
 
 シャツ　${shirts === "なし" ? "なし" : shirts + "枚"}
@@ -742,91 +733,81 @@
 ${other || "なし"}`;
 
 
-      console.log(
-        "送信内容:",
-        message
-      );
+  console.log(
+    "送信メッセージ:",
+    message
+  );
 
 
-      try {
+  try {
 
-        // =========================
-        // GASへ送信
-        // =========================
+    // =========================
+    // GASへ送信
+    // =========================
 
-        const formData =
-          new URLSearchParams();
+    const formData =
+      new URLSearchParams();
 
-        formData.append(
-          "message",
-          message
-        );
-
-
-        const response =
-          await fetch(
-            GAS_URL,
-            {
-              method: "POST",
-              body: formData
-            }
-          );
+    formData.append(
+      "message",
+      message
+    );
 
 
-        const result =
-          await response.text();
+    /*
+     * GASのレスポンスを
+     * ブラウザ側で待たない方式
+     *
+     * mode: "no-cors"
+     */
 
-
-        console.log(
-          "GAS response:",
-          result
-        );
-
-
-        if (
-          result.startsWith("ERROR")
-        ) {
-
-          throw new Error(result);
-
-        }
-
-
-        // =========================
-        // 成功
-        // =========================
-
-        alert(
-          "送信しました！"
-        );
-
-
-        // =========================
-        // 入力リセット
-        // =========================
-
-        resetForm();
-
-
-      } catch (error) {
-
-        console.error(error);
-
-        alert(
-          "送信できませんでした。\n" +
-          "通信状態を確認してください。"
-        );
-
-      } finally {
-
-        button.disabled = false;
-
-        button.textContent =
-          "LINEに送信";
-
+    await fetch(
+      GAS_URL,
+      {
+        method: "POST",
+        mode: "no-cors",
+        body: formData
       }
+    );
 
-    }
+
+    // =========================
+    // 成功
+    // =========================
+
+    alert(
+      "送信しました！"
+    );
+
+
+    resetForm();
+
+
+  } catch (error) {
+
+    console.error(
+      "送信エラー:",
+      error
+    );
+
+    alert(
+      "送信できませんでした。\n" +
+      "通信状態を確認してください。"
+    );
+
+
+  } finally {
+
+    button.disabled = false;
+
+    button.textContent =
+      "LINEに送信";
+
+  }
+
+}
+```
+
 
 
     // =========================

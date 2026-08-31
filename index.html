@@ -22,23 +22,22 @@
       height: 100%;
     }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont,
-               "Helvetica Neue", sans-serif;
+    body {
+      font-family: -apple-system, BlinkMacSystemFont,
+                   "Helvetica Neue", sans-serif;
 
-  background: #f5f5f5;
+      background: #f5f5f5;
 
-  /* LINE上部の表示領域を考慮 */
-  padding: 6px 6px 8px;
+      padding: 6px 6px 8px;
 
-  overflow: hidden;
-}
+      overflow: hidden;
+    }
 
-.container {
-  width: 100%;
-  max-width: none;
-  margin: 0 auto;
-}
+    .container {
+      width: 100%;
+      max-width: none;
+      margin: 0 auto;
+    }
 
     /* タイトル */
     h1 {
@@ -49,41 +48,110 @@ body {
       margin: 3px 0 8px;
     }
 
-    /* 入力項目 */
+    /* 項目 */
     .item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
       background: white;
 
-      height: 48px;
-
-      padding: 5px 10px;
+      padding: 7px 8px;
 
       margin-bottom: 5px;
 
       border-radius: 8px;
     }
 
-    .item label {
+    .item-label {
+      display: block;
+
       font-size: 16px;
       font-weight: bold;
-      white-space: nowrap;
+
+      margin-bottom: 6px;
     }
 
-    .input-area {
-      display: flex;
-      align-items: center;
+    /* 枚数ボタン */
+    .count-buttons {
+      display: grid;
+
+      grid-template-columns: repeat(4, 1fr);
+
+      gap: 6px;
+
+      width: 100%;
     }
 
-    input[type="number"] {
-      width: 65px;
-      height: 36px;
+    .count-button {
+      height: 40px;
 
       padding: 0;
 
-      font-size: 19px;
+      font-size: 15px;
+      font-weight: bold;
+
+      border: 1px solid #ccc;
+      border-radius: 6px;
+
+      background: #fff;
+      color: #333;
+
+      cursor: pointer;
+
+      margin: 0;
+    }
+
+    .count-button.selected {
+      background: #06c755;
+      border-color: #06c755;
+      color: white;
+    }
+
+    /* おむつ */
+    .diaper-area {
+      display: flex;
+      align-items: center;
+
+      gap: 6px;
+    }
+
+    .diaper-choice {
+      height: 40px;
+
+      flex: 1;
+
+      padding: 0;
+
+      font-size: 15px;
+      font-weight: bold;
+
+      border: 1px solid #ccc;
+      border-radius: 6px;
+
+      background: white;
+      color: #333;
+
+      margin: 0;
+    }
+
+    .diaper-choice.selected {
+      background: #06c755;
+      border-color: #06c755;
+      color: white;
+    }
+
+    #diaperNumberArea {
+      display: none;
+
+      align-items: center;
+
+      gap: 4px;
+    }
+
+    #diaperNumber {
+      width: 65px;
+      height: 40px;
+
+      padding: 0;
+
+      font-size: 18px;
       text-align: center;
 
       border: 1px solid #ccc;
@@ -93,8 +161,7 @@ body {
     }
 
     .unit {
-      font-size: 15px;
-      margin-left: 4px;
+      font-size: 14px;
     }
 
     /* その他 */
@@ -104,9 +171,9 @@ body {
 
       background: white;
 
-      height: 48px;
+      min-height: 48px;
 
-      padding: 5px 10px;
+      padding: 6px 8px;
 
       margin-top: 5px;
 
@@ -138,7 +205,7 @@ body {
     }
 
     /* 送信ボタン */
-    button {
+    #sendButton {
       display: block;
 
       width: 100%;
@@ -156,9 +223,11 @@ body {
 
       background: #06c755;
       color: white;
+
+      cursor: pointer;
     }
 
-    button:disabled {
+    #sendButton:disabled {
       opacity: 0.5;
     }
 
@@ -188,21 +257,35 @@ body {
       }
 
       .item {
-        height: 43px;
+        padding: 5px 7px;
         margin-bottom: 4px;
       }
 
+      .item-label {
+        margin-bottom: 4px;
+        font-size: 15px;
+      }
+
+      .count-button,
+      .diaper-choice {
+        height: 34px;
+        font-size: 14px;
+      }
+
+      #diaperNumber {
+        height: 34px;
+      }
+
       .other {
-        height: 43px;
+        min-height: 40px;
         margin-top: 4px;
       }
 
-      input[type="number"],
       input[type="text"] {
         height: 32px;
       }
 
-      button {
+      #sendButton {
         height: 42px;
         margin-top: 6px;
       }
@@ -220,22 +303,41 @@ body {
 
     <h1>🏫 保育園の持ち物</h1>
 
+
     <!-- シャツ -->
     <div class="item">
 
-      <label>シャツ</label>
+      <span class="item-label">シャツ</span>
 
-      <div class="input-area">
+      <div class="count-buttons">
 
-        <input
-          id="shirts"
-          type="number"
-          min="0"
-          inputmode="numeric"
-          value="0"
-        >
+        <button class="count-button selected"
+                data-item="shirts"
+                data-value="なし"
+                onclick="selectCount(this)">
+          なし
+        </button>
 
-        <span class="unit">枚</span>
+        <button class="count-button"
+                data-item="shirts"
+                data-value="1"
+                onclick="selectCount(this)">
+          1枚
+        </button>
+
+        <button class="count-button"
+                data-item="shirts"
+                data-value="2"
+                onclick="selectCount(this)">
+          2枚
+        </button>
+
+        <button class="count-button"
+                data-item="shirts"
+                data-value="3"
+                onclick="selectCount(this)">
+          3枚
+        </button>
 
       </div>
 
@@ -245,19 +347,37 @@ body {
     <!-- 肌着 -->
     <div class="item">
 
-      <label>肌着</label>
+      <span class="item-label">肌着</span>
 
-      <div class="input-area">
+      <div class="count-buttons">
 
-        <input
-          id="underwear"
-          type="number"
-          min="0"
-          inputmode="numeric"
-          value="0"
-        >
+        <button class="count-button selected"
+                data-item="underwear"
+                data-value="なし"
+                onclick="selectCount(this)">
+          なし
+        </button>
 
-        <span class="unit">枚</span>
+        <button class="count-button"
+                data-item="underwear"
+                data-value="1"
+                onclick="selectCount(this)">
+          1枚
+        </button>
+
+        <button class="count-button"
+                data-item="underwear"
+                data-value="2"
+                onclick="selectCount(this)">
+          2枚
+        </button>
+
+        <button class="count-button"
+                data-item="underwear"
+                data-value="3"
+                onclick="selectCount(this)">
+          3枚
+        </button>
 
       </div>
 
@@ -267,19 +387,37 @@ body {
     <!-- ズボン -->
     <div class="item">
 
-      <label>ズボン</label>
+      <span class="item-label">ズボン</span>
 
-      <div class="input-area">
+      <div class="count-buttons">
 
-        <input
-          id="pants"
-          type="number"
-          min="0"
-          inputmode="numeric"
-          value="0"
-        >
+        <button class="count-button selected"
+                data-item="pants"
+                data-value="なし"
+                onclick="selectCount(this)">
+          なし
+        </button>
 
-        <span class="unit">枚</span>
+        <button class="count-button"
+                data-item="pants"
+                data-value="1"
+                onclick="selectCount(this)">
+          1枚
+        </button>
+
+        <button class="count-button"
+                data-item="pants"
+                data-value="2"
+                onclick="selectCount(this)">
+          2枚
+        </button>
+
+        <button class="count-button"
+                data-item="pants"
+                data-value="3"
+                onclick="selectCount(this)">
+          3枚
+        </button>
 
       </div>
 
@@ -289,19 +427,38 @@ body {
     <!-- おむつ -->
     <div class="item">
 
-      <label>おむつ（残り）</label>
+      <span class="item-label">おむつ（残り）</span>
 
-      <div class="input-area">
+      <div class="diaper-area">
 
-        <input
-          id="diapers"
-          type="number"
-          min="0"
-          inputmode="numeric"
-          value="0"
-        >
+        <!-- 初期状態：不要 -->
+        <button
+          id="diaperNone"
+          class="diaper-choice selected"
+          onclick="selectDiaper('none')">
+          不要
+        </button>
 
-        <span class="unit">枚</span>
+        <button
+          id="diaperNeed"
+          class="diaper-choice"
+          onclick="selectDiaper('need')">
+          必要
+        </button>
+
+        <div id="diaperNumberArea">
+
+          <input
+            id="diaperNumber"
+            type="number"
+            min="0"
+            inputmode="numeric"
+            value="0"
+          >
+
+          <span class="unit">枚</span>
+
+        </div>
 
       </div>
 
@@ -325,8 +482,7 @@ body {
     <!-- 送信ボタン -->
     <button
       id="sendButton"
-      onclick="sendMessage()"
-    >
+      onclick="sendMessage()">
       LINEに送信
     </button>
 
@@ -351,13 +507,122 @@ body {
     // =========================
     // GAS WebアプリURL
     // =========================
-    //
-    // ★ここは現在使用しているURLを
-    // そのまま入れてください。
-    //
 
     const GAS_URL =
       "https://script.google.com/macros/s/AKfycbzF4kgOUhXYbaOeon0E_7hQ9Y5VxgWJkLVWrPLDdjwywathsHVLkZAIoi1wzgXmQfM/exec";
+
+
+    // =========================
+    // 選択した枚数
+    // =========================
+
+    const counts = {
+      shirts: "なし",
+      underwear: "なし",
+      pants: "なし"
+    };
+
+
+    // =========================
+    // 枚数ボタン選択
+    // =========================
+
+    function selectCount(button) {
+
+      const item =
+        button.dataset.item;
+
+      const value =
+        button.dataset.value;
+
+
+      // 値を保存
+
+      counts[item] = value;
+
+
+      // 同じ項目のボタンを取得
+
+      const buttons =
+        document.querySelectorAll(
+          `.count-button[data-item="${item}"]`
+        );
+
+
+      // 選択状態をリセット
+
+      buttons.forEach(btn => {
+
+        btn.classList.remove(
+          "selected"
+        );
+
+      });
+
+
+      // 押したボタンを選択状態
+
+      button.classList.add(
+        "selected"
+      );
+
+    }
+
+
+    // =========================
+    // おむつ選択
+    // =========================
+
+    function selectDiaper(type) {
+
+      const noneButton =
+        document.getElementById(
+          "diaperNone"
+        );
+
+      const needButton =
+        document.getElementById(
+          "diaperNeed"
+        );
+
+      const numberArea =
+        document.getElementById(
+          "diaperNumberArea"
+        );
+
+
+      if (type === "none") {
+
+        noneButton.classList.add(
+          "selected"
+        );
+
+        needButton.classList.remove(
+          "selected"
+        );
+
+        numberArea.style.display =
+          "none";
+
+      }
+
+
+      if (type === "need") {
+
+        noneButton.classList.remove(
+          "selected"
+        );
+
+        needButton.classList.add(
+          "selected"
+        );
+
+        numberArea.style.display =
+          "flex";
+
+      }
+
+    }
 
 
     // =========================
@@ -396,33 +661,69 @@ body {
     async function sendMessage() {
 
       const button =
-        document.getElementById("sendButton");
+        document.getElementById(
+          "sendButton"
+        );
 
 
       // 二重送信防止
 
       button.disabled = true;
-      button.textContent = "送信中...";
+
+      button.textContent =
+        "送信中...";
 
 
       // =========================
-      // 数字取得
+      // 数量取得
       // =========================
 
       const shirts =
-        document.getElementById("shirts").value;
+        counts.shirts;
 
       const underwear =
-        document.getElementById("underwear").value;
+        counts.underwear;
 
       const pants =
-        document.getElementById("pants").value;
+        counts.pants;
 
-      const diapers =
-        document.getElementById("diapers").value;
+
+      // =========================
+      // おむつ取得
+      // =========================
+
+      const diaperNeed =
+        document
+          .getElementById("diaperNeed")
+          .classList
+          .contains("selected");
+
+
+      let diapers;
+
+
+      if (diaperNeed) {
+
+        diapers =
+          document.getElementById(
+            "diaperNumber"
+          ).value || 0;
+
+      } else {
+
+        diapers = "不要";
+
+      }
+
+
+      // =========================
+      // その他
+      // =========================
 
       const other =
-        document.getElementById("other").value;
+        document.getElementById(
+          "other"
+        ).value;
 
 
       // =========================
@@ -432,16 +733,26 @@ body {
       const message =
 `【保育園の持ち物】
 
-シャツ　${shirts}枚
-肌着　${underwear}枚
-ズボン　${pants}枚
-おむつ　残${diapers}枚
+シャツ　${shirts === "なし" ? "なし" : shirts + "枚"}
+肌着　${underwear === "なし" ? "なし" : underwear + "枚"}
+ズボン　${pants === "なし" ? "なし" : pants + "枚"}
+おむつ　${diaperNeed ? "残" + diapers + "枚" : "不要"}
 
 その他
 ${other || "なし"}`;
 
 
+      console.log(
+        "送信内容:",
+        message
+      );
+
+
       try {
+
+        // =========================
+        // GASへ送信
+        // =========================
 
         const formData =
           new URLSearchParams();
@@ -490,27 +801,11 @@ ${other || "なし"}`;
         );
 
 
+        // =========================
         // 入力リセット
+        // =========================
 
-        document.getElementById(
-          "shirts"
-        ).value = 0;
-
-        document.getElementById(
-          "underwear"
-        ).value = 0;
-
-        document.getElementById(
-          "pants"
-        ).value = 0;
-
-        document.getElementById(
-          "diapers"
-        ).value = 0;
-
-        document.getElementById(
-          "other"
-        ).value = "";
+        resetForm();
 
 
       } catch (error) {
@@ -525,9 +820,66 @@ ${other || "なし"}`;
       } finally {
 
         button.disabled = false;
-        button.textContent = "LINEに送信";
+
+        button.textContent =
+          "LINEに送信";
 
       }
+
+    }
+
+
+    // =========================
+    // フォームリセット
+    // =========================
+
+    function resetForm() {
+
+      // シャツ・肌着・ズボンを
+      // 「なし」に戻す
+
+      counts.shirts = "なし";
+      counts.underwear = "なし";
+      counts.pants = "なし";
+
+
+      document
+        .querySelectorAll(".count-button")
+        .forEach(button => {
+
+          button.classList.remove(
+            "selected"
+          );
+
+
+          if (
+            button.dataset.value === "なし"
+          ) {
+
+            button.classList.add(
+              "selected"
+            );
+
+          }
+
+        });
+
+
+      // おむつを「不要」に戻す
+
+      selectDiaper("none");
+
+
+      document.getElementById(
+        "diaperNumber"
+      ).value = 0;
+
+
+      // その他をクリア
+
+      document.getElementById(
+        "other"
+      ).value = "";
 
     }
 
